@@ -1,0 +1,29 @@
+-application jar : une application java autonome
+-application war : deployer l'application dans un conteneur web deja demaré
+-spring web : spring mvc + tomcat(integré --> on n'a pas besoin d'installer ni de demarer tomcat, quand spring boot demare 
+il démare tomcat).
+-thymleaf : moteur de template qui évite d'utiliser du jsp classique, il permet de génrer les vues coté serveur
+-application spring boot : application java qu'il faut démarer
+-dossier static: mvc coté client html-css-image-js
+-template: mvc coté serveur, les vue géneres par thymleaf
+- quand spring boot demare il lit le fichier application.properties, et crée les entités.
+-pour gérer les entités on utilise spring data
+-une interface jpa repository herite de jpa repository --> ca suffit pour les méthodes classique pour gérer les entités
+- quand spring démare il vous donne le context de l'application
+-spring ioc demmare en premier lieu, il crée pas mal d'objets, il fait l'ioc, mais on a besoin d'acceder au resources qui sont 
+instanciés par spring(application context).
+-Il y a un controlleur frontale fournie par spring démaré par defaut
+- un controlleur c'est une classe qui contient l'annotation @controller
+- en spring mvc, une methode retourne géneralemnt un string qui est le nom de la vue associée
+- le modele c'est un objet une instance qui implemente l'interface map(clé,valeur), qui permet de stocker les objets
+-on a besoin d'un moteur de template qui permet de chercher les objets dans le model et les inserer dans la vue
+-pour utiliser thymleaf il faut le déclarer dans html tag sous forme d'un name space
+-dans spring mvc par defaut il ya un controlleur, une servlet fournit qui s'appelle dispatcher servlet, si vous trvailler dans
+un projet web dynamuique, il faut d'abhord déployer cette servlete, il faut la déclarer dans le fichier xml, et avec la configuration
+par defaut de spring boot il démarre dispatcher servlet.
+-quand spring boot detecte spring security, il fait configuration basique basée sur protocole http,authentification basique
+spring considére que toutes les requetes doivent étre authentifiés
+6 Pour pérsonnaliser la sécurité soit on utilise un fichier xml, soit on créé un classe de configuration en se basant sur les annotations
+-spring security elimine crsf, IL VOUS ENVOI UN TOKEN DANS LE FORM,la prochaine fois tu dois lenvoyer, chaque requette que 
+vous envoyer doit contenir ce token
+-mvc client, on utilise jwt,dans ce cas on desactive jwt
