@@ -22,7 +22,7 @@ public class ProduitController {
     //spring ioc
     @Autowired
     ProduitRepository produitRepository;
-    @GetMapping("/index")
+    @GetMapping("/user/index")
     public String index(Model model, @RequestParam(name = "page",defaultValue = "0") int p,@RequestParam(name = "size",defaultValue = "5") int s,
                         @RequestParam(name = "motCle",defaultValue = "") String mc){
         Page<Produit> pageProduits = produitRepository.chercher("%"+mc+"%",PageRequest.of(p,s));
@@ -35,34 +35,39 @@ public class ProduitController {
         return "produits";
     }
 
-    @GetMapping("/delete")
+    @GetMapping("/admin/delete")
     public String delete(@RequestParam(name = "id")  Long id,@RequestParam(name = "motCle") String motCle,@RequestParam(name = "page") int page,@RequestParam(name = "size") int size){
 
         Produit produit = produitRepository.findById(id).get();
         produitRepository.delete(produit);
-        return "redirect:/index?page="+page+"&size="+size+"&motCle="+motCle;
+        return "redirect:/user/index?page="+page+"&size="+size+"&motCle="+motCle;
     }
 
-    @GetMapping("/addProduct")
+    @GetMapping("/admin/addProduct")
     public String formProduit(Model model){
         model.addAttribute("produit", new Produit());
         return "formProduit";
     }
-    @GetMapping("/edit")
+    @GetMapping("/admin/edit")
     public String formEditedit(Model model,long id){
         Produit p = produitRepository.findById(id).get();
         model.addAttribute("produit", p);
         return "editProduit";
     }
+    @GetMapping("/login")
+    public String login(){
+
+        return "login";
+    }
     @GetMapping("/")
     public String home(){
-        return "redirect:/index";
+        return "redirect:/user/index";
     }
 @GetMapping("/403")
 public String accesdenied(){
         return "403";
     }
-    @PostMapping("/save")
+    @PostMapping("/admin/save")
     public String save(Model model, @Valid Produit produit, BindingResult  bindingResult){
         if(bindingResult.hasErrors()) {
             System.out.println(bindingResult.hasErrors());
