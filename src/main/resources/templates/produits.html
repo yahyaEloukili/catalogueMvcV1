@@ -1,0 +1,44 @@
+
+
+<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<div  layout:fragment="content">
+ <div class="container">
+     <h1>Products</h1>
+     <form th:action="@{index}" method="get">
+         <label>Mot clé</label>
+         <input type="text" name="motCle" th:value="${motCle}">
+         <button class="btn btn-primary">Search</button>
+
+     </form>
+  <table border="1" class="table">
+       <thead>
+       <tr>
+           <th>Id</th>
+           <th>Designation</th>
+           <th>Price</th>
+           <th>Quantity</th>
+       </tr>
+       </thead>
+      <tbody>
+        <tr th:each="p:${listProduits}">
+            <td th:text="${p.id}"></td>
+            <td th:text="${p.designation}"></td>
+            <td th:text="${p.price}"></td>
+            <td th:text="${p.quantite}"></td>
+            <td><a th:href="@{edit(id=${p.id})}">Edit</a></td>
+            <td><a onclick="confirm('are you sure?')" th:href="@{delete(id=${p.id},page=${currentPage},size=${size},motCle=${motCle})}">Delete</a></td>
+        </tr>
+      </tbody>
+  </table>
+     <div>
+         <ul class="nav nav-pills">
+             <li th:class="${currentPage == status.index ? 'active' : ''}" th:each="page,status:${pages}" >
+                 <a th:text="${status.index}" th:href="@{index(page=${status.index},size=${size},motCle=${motCle})}"></a>
+             </li>
+         </ul>
+     </div>
+ </div>
+</div>
+</html>

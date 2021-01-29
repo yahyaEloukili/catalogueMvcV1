@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang="en"  xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+
+
+<div layout:fragment="content">
+<div class="container" >
+    <div class="panel panel-default mt-5">
+        <div class="panel-heading">
+         Confirmation
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label>ID</label>
+                <label th:text="${produit.id}"></label>
+            </div>
+            <div class="form-group">
+                <label>Name</label>
+                <label th:text="${produit.designation}"></label>
+            </div>
+            <div class="form-group">
+                <label>Price</label>
+                <label th:text="${produit.price}"></label>
+            </div>
+            <div class="form-group">
+                <label>Quantity</label>
+                <label th:text="${produit.quantite}"></label>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+</html>
